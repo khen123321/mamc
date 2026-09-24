@@ -1,26 +1,67 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --mcmc-spartan-green: #015e32;
+  --mcmc-excellence-green: #0d7e6a;
+  --mcmc-white: #ffffff;
+  --mcmc-black: #000000;
+
+  --brand-primary: var(--mcmc-spartan-green);
+  --brand-primary-hover: #014425;
+  --brand-secondary: var(--mcmc-excellence-green);
+  --brand-secondary-hover: #096f5d;
+  --brand-background: #f8faf8;
+  --brand-surface: var(--mcmc-white);
+  --brand-surface-soft: #f1f7f4;
+  --brand-border: #dbe7df;
+  --brand-text: #111f18;
+  --brand-muted: #5d6b63;
+  --brand-focus: rgba(13, 126, 106, 0.24);
+
+  --status-success: #1e9e62;
+  --status-info: #2e86c1;
+  --status-specialty: #8e5ea2;
+  --status-waiting: #d6a600;
+  --status-pending: #e67e22;
+  --status-danger: #c2410c;
+
+  --background: var(--brand-background);
+  --foreground: var(--brand-text);
+  --mcmc-primary: var(--brand-primary);
+  --mcmc-primary-dark: var(--brand-primary-hover);
+  --mcmc-accent: var(--brand-secondary);
+  --mcmc-background: var(--brand-background);
+  --mcmc-surface: var(--brand-surface);
+  --mcmc-text: var(--brand-text);
+  --mcmc-muted: var(--brand-muted);
+  --mcmc-success: var(--status-success);
+  --mcmc-warning: var(--status-waiting);
+  --mcmc-danger: var(--status-danger);
+  --font-body-alt: "Suisse Int'l", "Helvetica Neue", Arial, sans-serif;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-poppins);
+  --font-serif: var(--font-lora);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
+  min-height: 100vh;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins), var(--font-body-alt);
 }
+a { text-decoration: none; }
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--brand-focus);
+  outline-offset: 2px;
+}
+button, input, select, textarea { font: inherit; }
