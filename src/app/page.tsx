@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Baby, HeartPulse, Hospital, Map, Microscope, Pill, Search, Siren, Stethoscope, Users } from "lucide-react";
-import { MCMCTagline } from "@/components/brand/mcmc-tagline";
+import { ArrowRight, Baby, CalendarDays, HeartPulse, Hospital, Map, MapPin, Microscope, Pill, Search, Siren, Stethoscope, Users } from "lucide-react";
 import { DoctorCard } from "@/components/doctors/doctor-card";
 import { PublicNavbar } from "@/components/layout/public-navbar";
 import { PublicContainer, PublicSection, SectionHeader } from "@/components/layout/page-shell";
@@ -14,12 +13,16 @@ import { contentService } from "@/lib/services/content-service";
 import { doctorService } from "@/lib/services/doctor-service";
 
 const patientActions = [
-  { label: "Find a Doctor", description: "Search by name, specialty, or department.", href: "/doctors", icon: Search },
-  { label: "Hospital Services", description: "Review departments, specialty clinics, and patient service areas.", href: "/services", icon: Hospital },
-  { label: "HMO & Insurance", description: "Prepare requirements before visiting the insurance desk.", href: "/hmo", icon: Users },
-  { label: "Hospital Map", description: "Find clinics, departments, and service areas.", href: "/hospital-map", icon: Map },
-  { label: "Careers", description: "Explore hospital career information and recruitment updates.", href: "/careers", icon: Stethoscope },
-  { label: "Contact Us", description: "Find public contact details and information desk hours.", href: "/contact", icon: HeartPulse },
+  { label: "Find a Doctor", href: "/doctors", icon: Search },
+  { label: "Our Services", href: "/services", icon: Hospital },
+  { label: "HMO & Insurance", href: "/hmo", icon: Users },
+  { label: "Hospital Map", href: "/hospital-map", icon: Map },
+];
+
+const heroTrustIndicators = [
+  { value: hospital.foundedYear, label: "Serving since", icon: CalendarDays },
+  { value: hospital.location.replace(", Philippines", ""), label: "Location", icon: MapPin },
+  { value: hospital.emergency.availability, label: "Emergency Care", icon: HeartPulse },
 ];
 
 const services = [
@@ -41,65 +44,82 @@ export default function Home() {
     <>
       <PublicNavbar />
       <main>
-        <PublicSection className="bg-white py-10 md:py-14 lg:py-[72px]">
+        <PublicSection className="border-b border-[var(--brand-border)] bg-[#f7f9f8] py-10 md:py-14 lg:py-16">
           <PublicContainer>
-            <div className="grid items-center gap-10 xl:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] xl:gap-20">
+            <div className="grid items-center gap-10 xl:min-h-[560px] xl:grid-cols-[minmax(0,0.46fr)_minmax(0,0.54fr)] xl:gap-16">
               <div>
-                <h1 className="max-w-2xl text-4xl font-semibold leading-[1.12] tracking-tight text-slate-950 md:text-5xl lg:text-[52px] lg:leading-[1.1]">
-                  <MCMCTagline />
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--brand-secondary)] md:text-[13px]">
+                  {hospital.name}
+                </p>
+                <h1 className="mt-4 max-w-[530px]">
+                  <HeroTagline />
                 </h1>
-                <p className="mt-5 max-w-[540px] text-base leading-7 text-slate-600 md:text-lg">
+                <p className="mt-5 max-w-[540px] text-base font-normal leading-[1.7] text-slate-700 md:text-lg">
                   Compassionate care, trusted expertise, and easier access to the services you need.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <Link href="/doctors">
-                    <Button size="lg">Find a Doctor</Button>
+                  <Link href="/doctors" className="inline-flex h-12 items-center justify-center rounded-md bg-[var(--brand-primary)] px-5 text-base font-semibold text-white shadow-sm transition hover:bg-[var(--brand-primary-hover)]">
+                    Find a Doctor
                   </Link>
-                  <Link href="/services">
-                    <Button size="lg" variant="secondary">View Services</Button>
+                  <Link href="/services" className="inline-flex h-12 items-center justify-center rounded-md border border-[var(--brand-primary)] bg-white px-5 text-base font-semibold text-[var(--brand-primary)] transition hover:bg-[var(--brand-surface-soft)]">
+                    View Services
                   </Link>
-                  <Link href="/demo" className="inline-flex h-12 items-center px-2 text-sm font-semibold text-[var(--brand-primary)] hover:text-[var(--brand-secondary)]">
-                    Demo Hub
-                    <ArrowRight className="ml-1.5 h-4 w-4" />
-                  </Link>
+                </div>
+                <div className="mt-9 grid max-w-[620px] gap-4 sm:grid-cols-3">
+                  {heroTrustIndicators.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <div key={item.label} className="flex items-start gap-3 border-t border-[#dbe7df] pt-4">
+                        <Icon className="mt-0.5 h-4 w-4 shrink-0 text-[var(--brand-secondary)]" aria-hidden="true" />
+                        <div>
+                          <p className="text-sm font-bold leading-tight text-[var(--brand-primary)] md:text-base">{item.value}</p>
+                          <p className="mt-1 text-xs font-medium uppercase tracking-[0.08em] text-slate-500">{item.label}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 
-              <div className="relative aspect-[16/9] max-h-[460px] overflow-hidden rounded-xl border border-[var(--brand-border)] bg-slate-100 shadow-sm xl:aspect-[4/3] xl:max-h-none">
-                <Image
-                  src={presentationImages.heroHospital.src}
-                  alt={presentationImages.heroHospital.alt}
-                  fill
-                  priority
-                  sizes="(max-width: 1279px) 100vw, 625px"
-                  className="object-cover"
-                />
+              <div className="relative overflow-hidden rounded-[18px] border border-[#dbe7df] bg-white p-2 shadow-sm">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] bg-slate-100">
+                  <Image
+                    src={presentationImages.heroHospital.src}
+                    alt={presentationImages.heroHospital.alt}
+                    fill
+                    priority
+                    sizes="(max-width: 1279px) 100vw, 690px"
+                    className="object-cover"
+                  />
+                </div>
               </div>
             </div>
           </PublicContainer>
         </PublicSection>
 
-        <PublicSection className="bg-slate-50 py-12 md:py-16 lg:py-[72px]">
-          <PublicContainer>
-            <SectionHeader title="How can we help you today?" description="Choose a service, find a doctor, or prepare for your visit before you arrive." />
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {patientActions.map((action) => {
+        <section className="relative z-10 bg-white">
+          <PublicContainer className="-mt-px">
+            <div className="grid grid-cols-2 overflow-hidden rounded-none border-x border-b border-[var(--brand-border)] bg-white lg:grid-cols-4">
+              {patientActions.map((action, index) => {
                 const Icon = action.icon;
+                const mobileDivider = index % 2 === 0 ? "border-r md:border-r-0" : "";
                 return (
-                  <Link key={action.label} href={action.href}>
-                    <Card className="h-full transition hover:border-[var(--brand-secondary)]">
-                      <CardContent>
-                        <Icon className="h-7 w-7 text-[var(--brand-primary)]" />
-                        <p className="mt-4 text-lg font-semibold text-slate-950">{action.label}</p>
-                        <p className="mt-2 text-sm leading-6 text-slate-600">{action.description}</p>
-                      </CardContent>
-                    </Card>
+                  <Link
+                    key={action.label}
+                    href={action.href}
+                    className={`${mobileDivider} group flex min-h-20 items-center justify-between gap-4 border-t border-[var(--brand-border)] px-5 py-4 transition hover:bg-[var(--brand-surface-soft)] lg:border-l lg:border-t-0 lg:px-6 lg:first:border-l-0`}
+                  >
+                    <span className="flex items-center gap-3">
+                      <Icon className="h-5 w-5 text-[var(--brand-primary)]" aria-hidden="true" />
+                      <span className="text-sm font-semibold text-slate-900 md:text-[15px]">{action.label}</span>
+                    </span>
+                    <ArrowRight className="h-4 w-4 text-slate-400 transition group-hover:translate-x-0.5 group-hover:text-[var(--brand-primary)]" aria-hidden="true" />
                   </Link>
                 );
               })}
             </div>
           </PublicContainer>
-        </PublicSection>
+        </section>
 
         <PublicSection id="doctors" className="bg-white">
           <PublicContainer>
@@ -255,5 +275,20 @@ function StatBlock({ label, value }: { label: string; value: string }) {
       <p className="text-sm text-slate-500">{label}</p>
       <p className="mt-1 text-2xl font-semibold text-slate-950">{value}</p>
     </div>
+  );
+}
+
+function HeroTagline() {
+  return (
+    <span className="block leading-[0.98] tracking-[-0.025em] text-[#123126]">
+      <span className="block whitespace-nowrap">
+        <span className="align-baseline text-[clamp(2.1rem,8.2vw,3.05rem)] font-semibold text-[#123126]">Where</span>{" "}
+        <em className="font-serif align-baseline text-[clamp(2.45rem,9.4vw,3.55rem)] font-semibold italic text-[var(--brand-primary)]">Compassion</em>
+      </span>
+      <span className="block whitespace-nowrap">
+        <span className="align-baseline text-[clamp(2.1rem,8.2vw,3.05rem)] font-semibold text-[#123126]">Meets</span>{" "}
+        <em className="font-serif align-baseline text-[clamp(2.45rem,9.4vw,3.55rem)] font-semibold italic text-[var(--brand-secondary)]">Excellence</em>
+      </span>
+    </span>
   );
 }

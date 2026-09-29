@@ -7,7 +7,7 @@ const poppins = Poppins({ variable: "--font-poppins", subsets: ["latin"], weight
 const lora = Lora({ variable: "--font-lora", subsets: ["latin"], style: ["italic"], weight: ["500", "600", "700"] });
 
 export const metadata: Metadata = {
-  title: `${hospital.name} | where Compassion meets Excellence`,
+  title: `${hospital.name} | Where Compassion meets Excellence`,
   description: `Patient information, services, doctors, directions, and contact details for ${hospital.name}.`,
 };
 

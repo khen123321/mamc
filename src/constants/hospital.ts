@@ -1,7 +1,7 @@
 export const hospital = {
   name: "Madonna and Child Medical Center",
   shortName: "MCMC",
-  tagline: "where Compassion meets Excellence",
+  tagline: "Where Compassion meets Excellence",
   location: "Cagayan de Oro City, Philippines",
   address: "J.V. Seriña St., Brgy. Carmen, Cagayan de Oro City, Philippines",
   foundedYear: "1976",
