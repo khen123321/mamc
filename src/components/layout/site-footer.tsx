@@ -50,7 +50,21 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-white/10 px-4 py-5 text-sm text-white/80">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <p>Copyright © 2026 {hospital.name}. All rights reserved.</p>
+          <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
+            <span>Copyright © 2026 {hospital.name}. All rights reserved.</span>
+            <span aria-hidden="true">|</span>
+            <span>
+              Made by{" "}
+              <a
+                href="https://www.taptaptap.shop/products"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-[#08AFC4] transition hover:text-[#35c7d8] hover:underline"
+              >
+                TapTapTap
+              </a>
+            </span>
+          </p>
           <div className="flex gap-4">
             <Link href="#" className="hover:text-white">
               Privacy Policy
