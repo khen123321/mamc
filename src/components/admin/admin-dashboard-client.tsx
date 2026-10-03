@@ -45,7 +45,7 @@ export function AdminDashboardClient() {
       return;
     }
     demoResetService.resetInternalOperations();
-    setResetMessage("Visit tracking and service ticketing demo state restored");
+    setResetMessage("Visit tracking and queue management demo state restored");
     setTimeout(() => window.location.reload(), 450);
   }
 

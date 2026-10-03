@@ -22,22 +22,26 @@ export function SiteFooter() {
   return (
     <footer id="footer" className="mt-16 bg-[var(--brand-primary)] text-white">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
-        <div>
+        <div className="min-w-0">
           <div className="inline-flex rounded-md bg-white p-3">
-            <MCMCLogo variant="vertical" className="w-[220px]" />
+            <MCMCLogo variant="vertical" className="w-[190px] xl:w-[220px]" />
           </div>
-          <MCMCTagline compact className="mt-4 text-lg text-white [&_em]:text-white" />
+          <MCMCTagline
+            compact
+            className="mt-4 text-lg text-white [&_em]:text-white"
+          />
           <p className="mt-4 text-sm leading-6 text-white/80">
-            Compassionate care, trusted expertise, and practical information for patients and visitors.
+            Compassionate care, trusted expertise, and practical information for
+            patients and visitors.
           </p>
         </div>
 
         <FooterColumn title="Patient Services" items={patientServices} />
         <FooterColumn title="Information" items={information} />
 
-        <div>
+        <div className="min-w-0">
           <h3 className="font-semibold">Contact</h3>
-          <div className="mt-4 space-y-3 text-sm leading-6 text-white/80">
+          <div className="mt-4 space-y-3 text-sm leading-6 text-white/80 [overflow-wrap:anywhere]">
             <p>{hospital.address}</p>
             <p>
               {hospital.infoDesk.label}: {hospital.infoDesk.hours}
@@ -79,9 +83,15 @@ export function SiteFooter() {
   );
 }
 
-function FooterColumn({ title, items }: { title: string; items: { label: string; href: string }[] }) {
+function FooterColumn({
+  title,
+  items,
+}: {
+  title: string;
+  items: { label: string; href: string }[];
+}) {
   return (
-    <div>
+    <div className="min-w-0">
       <h3 className="font-semibold">{title}</h3>
       <div className="mt-4 grid gap-2 text-sm text-white/80">
         {items.map((item) => (

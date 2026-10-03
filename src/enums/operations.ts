@@ -61,7 +61,6 @@ export enum DepartmentStatus {
 export enum AuditModule {
   RoleManagement = "Role Management",
   WebsiteAdmin = "Website Admin",
-  InternalTicketing = "Internal Ticketing",
   QueueManagement = "Queue Management",
   VisitTracking = "Visit Tracking",
   PatientAssignment = "Patient Assignment",
